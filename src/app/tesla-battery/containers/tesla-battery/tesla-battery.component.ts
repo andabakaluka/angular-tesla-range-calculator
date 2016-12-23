@@ -13,6 +13,31 @@ import { BatteryService } from '../../tesla-battery.service';
       <h1>{{ title }}</h1>
       <tesla-car [wheelsize]="tesla.get('config.wheels').value"></tesla-car>
       <tesla-stats [stats]="stats"></tesla-stats>
+      <div class="tesla-controls cf" formGroupName="config">
+        <tesla-counter
+          [title]="'Speed'"
+          [unit]="'mph'"
+          [step]="5"
+          [min]="45"
+          [max]="70"
+          formControlName="speed">
+        </tesla-counter>
+        <div class="tesla-climate cf">
+          <tesla-counter
+            [title]="'Outside Temperature'"
+            [unit]="'°'" 
+            [step]="10"
+            [min]="-10"
+            [max]="40"
+            formControlName="temperature">
+          </tesla-counter>
+          <tesla-climate 
+            [limit]="tesla.get('config.temperature').value > 10" 
+            formControlName="climate">
+          </tesla-climate>
+        </div>
+        <tesla-wheels formControlName="wheels"></tesla-wheels>
+      </div>
       <div class="tesla-battery__notice">
         <p>
           The actual amount of range that you experience will vary based 
@@ -64,9 +89,9 @@ export class TeslaBatteryComponent implements OnInit {
         wheels: 19
       })
     });
-
-    this.stats = this.calculateStats(this.results, this.tesla.controls['config'].value);
-    
+    this.stats = this.calculateStats(this.results, this.tesla.controls['config'].value);   
+    this.tesla.controls['config'].valueChanges.subscribe(data => {
+      this.stats = this.calculateStats(this.results, data);
+    });
   }
-
 }

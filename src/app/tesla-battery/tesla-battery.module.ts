@@ -12,6 +12,9 @@ import { BatteryService } from './tesla-battery.service';
 import { TeslaBatteryComponent } from './containers/tesla-battery/tesla-battery.component'; 
 import { TeslaCarComponent } from './components/tesla-car/tesla-car.component';
 import { TeslaStatsComponent } from './components/tesla-stats/tesla-stats.component';
+import { TeslaCounterComponent } from './components/tesla-counter/tesla-counter.component';
+import { TeslaClimateComponent } from './components/tesla-climate/tesla-climate.component';
+import { TeslaWheelsComponent } from './components/tesla-wheels/tesla-wheels.component';
 
 
 @NgModule({
@@ -19,7 +22,10 @@ import { TeslaStatsComponent } from './components/tesla-stats/tesla-stats.compon
     // registering our container component
     TeslaBatteryComponent,
     TeslaCarComponent,
-    TeslaStatsComponent
+    TeslaStatsComponent,
+    TeslaCounterComponent,
+    TeslaClimateComponent,
+    TeslaWheelsComponent
   ],
   imports: [
     CommonModule,
